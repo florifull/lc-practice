@@ -10,3 +10,5 @@ class Solution:
             else:
                 r -= 1
         return maxA
+
+# T: O(n), S: O(1)
