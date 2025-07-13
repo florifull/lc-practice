@@ -10,3 +10,4 @@ class Solution:
                 l += 1
             maxL = max(maxL, r - l + 1)
         return maxL
+        # T: O(n), S: O(1)
