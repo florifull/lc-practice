@@ -8,5 +8,5 @@ class Solution:
                 stack.append(p)
             elif stack:
                 if closers[p] != stack.pop(): return False
-            else: return False
+            else: return False  # case where more closers than openers
         return True if not stack else False
