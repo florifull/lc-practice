@@ -11,3 +11,4 @@ class Solution:
                 continue
             l += 1
         return maxA
+        # T: O(n), S: O(1)
