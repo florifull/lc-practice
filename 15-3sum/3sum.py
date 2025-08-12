@@ -17,4 +17,5 @@ class Solution:
                 m += 1
                 while m < r and nums[m] == nums[m-1]:
                     m += 1
-        return res    
+        return res
+    # T: O(n^2) S: O(n)
