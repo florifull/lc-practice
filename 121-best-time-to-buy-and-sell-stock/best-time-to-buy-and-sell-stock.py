@@ -9,4 +9,3 @@ class Solution:
             profit = prices[r] - prices[l]
             maxP = max(maxP, profit)
         return maxP
-    # T: O(n), S: O(1)
