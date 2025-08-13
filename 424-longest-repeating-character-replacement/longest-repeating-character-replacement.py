@@ -6,8 +6,7 @@ class Solution:
         counts = {}
         l = 0
         maxL = 0
-        counts[s[l]] = 1
-        for r in range(1, len(s)):
+        for r in range(len(s)):
             counts[s[r]] = counts.get(s[r], 0) + 1
             bf = (r - l + 1) - max(counts.values())
             while bf > k:
@@ -16,3 +15,4 @@ class Solution:
                 bf = (r - l + 1) - max(counts.values())
             maxL = max(maxL, r - l + 1)
         return maxL
+    # T: O(n), S: O(n)
