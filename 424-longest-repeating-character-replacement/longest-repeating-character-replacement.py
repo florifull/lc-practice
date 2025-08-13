@@ -10,7 +10,7 @@ class Solution:
         for r in range(1, len(s)):
             counts[s[r]] = counts.get(s[r], 0) + 1
             bf = (r - l + 1) - max(counts.values())
-            while bf > k and l < r:
+            while bf > k:
                 counts[s[l]] -= 1
                 l += 1
                 bf = (r - l + 1) - max(counts.values())
