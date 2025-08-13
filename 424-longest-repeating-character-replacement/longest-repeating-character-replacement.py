@@ -5,14 +5,14 @@ class Solution:
 
         counts = {}
         l = 0
-        maxL = 0
+        maxF, maxL = 0, 0
         for r in range(len(s)):
             counts[s[r]] = counts.get(s[r], 0) + 1
-            bf = (r - l + 1) - max(counts.values())
-            while bf > k:
+            maxF = max(maxF, counts[s[r]])
+            while (r - l + 1) - maxF > k:
                 counts[s[l]] -= 1
                 l += 1
-                bf = (r - l + 1) - max(counts.values())
+                maxF = max(maxF, max(counts.values()))
             maxL = max(maxL, r - l + 1)
         return maxL
     # T: O(n), S: O(n)
