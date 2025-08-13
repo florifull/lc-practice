@@ -13,3 +13,4 @@ class Solution:
             visited.add(s[r])
             longestS = max(longestS, len(visited))
         return longestS
+    # T: O(n), S: O(n)
