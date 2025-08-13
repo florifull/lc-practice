@@ -1,5 +1,6 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2): return False
         uniCode = [0] * 26
         for c in s1:
             uniCode[ord(c) - ord('a')] += 1
@@ -15,4 +16,4 @@ class Solution:
             if tuple(uniCode) == tupleUnicode:
                 return True
         return False
-
+        # T: O(n), S: O(1)
