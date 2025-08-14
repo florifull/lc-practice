@@ -1,12 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        # LIFO - solution
-        closers = {'}':'{', ')':'(', ']':'['}
+        if len(s) <= 1: return False
         stack = []
-        for p in s:
-            if p not in closers:
-                stack.append(p)
-            elif stack:
-                if closers[p] != stack.pop(): return False
-            else: return False  # case where more closers than openers
+        closers = {')':'(', '}':'{', ']':'['}
+
+        for c in s:
+            if c in closers:
+                if not stack: return False
+                prev = stack.pop()
+                if prev != closers[c]: return False
+                continue
+            stack.append(c)
         return True if not stack else False
