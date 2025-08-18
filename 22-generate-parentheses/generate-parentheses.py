@@ -11,7 +11,7 @@ class Solution:
                 stack.append('(')
                 bt(openers + 1, closers)
                 stack.pop()
-            if closers < n and closers < openers:
+            if closers < openers:
                 stack.append(')')
                 bt(openers, closers + 1)
                 stack.pop()
