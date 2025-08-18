@@ -13,3 +13,4 @@ class Solution:
             else:
                 stack.append(int(s))
         return stack[-1]
+    # T: O(n), S: O(n)
