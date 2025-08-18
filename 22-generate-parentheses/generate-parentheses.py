@@ -5,7 +5,7 @@ class Solution:
         def bt(openers, closers):
             # if we have open and close parantheses and maxed out..
             if openers == closers == n:
-                res.append(''.join(stack[:]))
+                res.append(''.join(stack))
                 return
             if openers < n:
                 stack.append('(')
