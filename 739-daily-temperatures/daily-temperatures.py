@@ -10,3 +10,5 @@ class Solution:
             stack.append((i, t))
         return output
     # T: O(n), S: O(n)
+    # stack holds smaller vals towards the top..
+    # - ex stack in middle of running will hold [75, 71, 69]
