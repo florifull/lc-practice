@@ -9,3 +9,4 @@ class Solution:
                 output[stack_i] = i - stack_i
             stack.append((i, t))
         return output
+    # T: O(n), S: O(n)
