@@ -5,3 +5,4 @@ class Solution:
             if nums[i] == target:
                 minVal = min(minVal, abs(i - start))
         return minVal
+        # T: O(n), S: O(1)
