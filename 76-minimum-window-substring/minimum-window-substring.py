@@ -3,7 +3,7 @@ class Solution:
         if not s or not t: return ''
         tOccs = collections.Counter(t)
         sOccs = {}
-        totalS, totalT = 0, len(t)
+        totalS, totalT = 0, len(t)  # keeps count of min required chars for valid window
         l = 0
         minL, twoPtrs = float('inf'), [-1, -1]
 
@@ -22,3 +22,4 @@ class Solution:
                     sOccs[s[l]] -= 1
                 l += 1
         return s[twoPtrs[0]:twoPtrs[1]+1] if minL != float('inf') else ''
+    # T: O(n), S: O(m)
