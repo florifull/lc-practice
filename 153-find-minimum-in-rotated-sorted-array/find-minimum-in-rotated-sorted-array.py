@@ -1,7 +1,5 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        if len(nums) < 2: return nums[0]
-        if len(nums) == 2: return min(nums[0], nums[1])
         # find START of our increasing seq
             # when rightmost < leftmost AND middle > leftmost - means left:m is inc
             # SO, our right side window MUST hold start
