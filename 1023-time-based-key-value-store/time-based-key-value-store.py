@@ -11,7 +11,7 @@ class TimeMap:
     def get(self, key: str, timestamp: int) -> str:
         ourList = self.ourMap[key]
         l, r = 0, len(ourList) - 1
-        largestTimestampStringPair = [-1, '']
+        largestTimestampStringPair = ''
         while l <= r:
             m = (l + r) // 2
             middleTimeStamp = ourList[m][1]
@@ -19,12 +19,13 @@ class TimeMap:
             if middleTimeStamp == timestamp: return ourString
             # binary search
             if middleTimeStamp < timestamp:
-                largestTimestampStringPair = [middleTimeStamp, ourString]
+                largestTimestampStringPair = ourString
                 l = m + 1
             else: 
                 # middleTimeStamp is greater than timestamp
                 r = m - 1
-        return largestTimestampStringPair[1]
+        return largestTimestampStringPair
+    # T: O(nlogn), S: O(n)
 
 # Your TimeMap object will be instantiated and called as such:
 # obj = TimeMap()
