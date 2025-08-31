@@ -12,3 +12,4 @@ class Solution:
             curr.next = prev
             prev, curr = curr, tmp
         return prev
+    # T: O(n), S: O(1)
