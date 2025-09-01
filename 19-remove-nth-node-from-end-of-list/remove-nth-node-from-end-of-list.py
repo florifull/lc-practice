@@ -8,21 +8,15 @@ class Solution:
         # edge case
         if not head.next and n == 1: return None
 
-        # traverse the LL
-        rcounter = 0
-        r = head
-        while r:
-            rcounter += 1
+        dummy = ListNode()
+        dummy.next = head
+        l, r = dummy, head
+        windowDistance = 1
+        while r and windowDistance < n:
+            windowDistance += 1
             r = r.next
-        # edge case
-        if rcounter - n + 1 == 1:
-            return head.next
-        lcounter = 0
-        prev, l = None, head
-        while l:
-            lcounter += 1
-            if rcounter - lcounter + 1 == n:
-                prev.next = l.next
-            else:
-                prev, l = l, l.next
-        return head
+        # get to end of LL
+        while r and r.next:
+            l, r = l.next, r.next
+        l.next = l.next.next
+        return dummy.next
