@@ -20,3 +20,4 @@ class Solution:
         elif list2 and not list1:
             ptr.next = list2
         return dummy.next
+    # T: O(n + m), S: O(1)
