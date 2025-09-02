@@ -5,24 +5,19 @@
 #         self.next = next
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
-        # traverse l1
-        l1Array = []
-        tmp1 = l1
-        while tmp1:
-            l1Array.append(str(tmp1.val))
-            tmp1 = tmp1.next
-        l2Array = []
-        tmp2 = l2
-        while tmp2:
-            l2Array.append(str(tmp2.val))
-            tmp2 = tmp2.next
-        # l1 and l2 vals are contained within our arrays
-        ourSum = int(''.join(l1Array[::-1])) + int(''.join(l2Array[::-1]))
-        ourArraySum = [int(_) for _ in str(ourSum)]
         dummy = ListNode()
-        prev = dummy
-        for i in range(len(ourArraySum) - 1, -1, -1):
-            curr = ListNode(ourArraySum[i])
-            prev.next = curr
-            prev = curr
+        ptr = dummy
+        carry = 0
+        while l1 or l2 or carry:
+            l1val = 0 if not l1 else l1.val
+            l2val = 0 if not l2 else l2.val
+            sumVal = l1val + l2val + carry
+            
+            carry = sumVal // 10 #ex 15 // 10 = 1
+            newNodeVal = sumVal % 10
+
+            newNode = ListNode(newNodeVal)
+            ptr.next = newNode
+            ptr = ptr.next
+            l1, l2 = l1.next if l1 else None, l2.next if l2 else None
         return dummy.next
