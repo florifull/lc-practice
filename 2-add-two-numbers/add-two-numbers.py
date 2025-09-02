@@ -21,3 +21,4 @@ class Solution:
             ptr = ptr.next
             l1, l2 = l1.next if l1 else None, l2.next if l2 else None
         return dummy.next
+    # T: O(max(m, n)), S: O(max(m, n)) -> where m and n are the number of nodes in ea LL
