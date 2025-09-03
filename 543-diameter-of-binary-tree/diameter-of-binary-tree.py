@@ -11,9 +11,12 @@ class Solution:
         def dfs(node):
             if not node: return 0
 
-            left = dfs(node.left)
-            right = dfs(node.right)
-            if left + right > self.diameter: self.diameter = left + right
-            return max(left, right) + 1
+            maxLeftHeight = dfs(node.left)
+            maxRightHeight = dfs(node.right)
+            localDiameter = maxLeftHeight + maxRightHeight
+            if localDiameter > self.diameter: self.diameter = localDiameter
+            # return max height from said node
+            return max(maxLeftHeight, maxRightHeight) + 1
         dfs(root)
         return self.diameter
+    # T: O(n), S: O(h)
