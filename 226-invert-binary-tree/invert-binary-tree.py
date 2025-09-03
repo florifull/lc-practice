@@ -10,4 +10,4 @@ class Solution:
         if not root: return None
         root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
-    # T: O(n), S: O(1)
+    # T: O(n), S: O(h)
