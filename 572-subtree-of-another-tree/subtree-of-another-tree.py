@@ -14,10 +14,7 @@ class Solution:
         # traverse all root nodes, checking whether it is same tree as subroot..
         def dfs(node):
             if not node: return False
-            res = isSameTree(node, subRoot)
-            if res: return True
-            left, right = dfs(node.left), dfs(node.right)
-            return left or right
-        
+            if isSameTree(node, subRoot): return True
+            return dfs(node.left) or dfs(node.right)
         return dfs(root)
-            
+    # T: O(n), S: O(H)
