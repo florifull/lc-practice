@@ -15,3 +15,4 @@ class Solution:
             return self.lowestCommonAncestor(root.left, p, q)
         else:
             return self.lowestCommonAncestor(root.right, p, q)
+    # T: O(h), O(h)
