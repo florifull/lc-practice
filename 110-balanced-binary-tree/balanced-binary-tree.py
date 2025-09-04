@@ -16,3 +16,4 @@ class Solution:
             return 1 + max(left, right)
         dfs(root, 0)
         return self.balanced
+    # T: O(n), S: O(H) - where H is the height of the tree, sparse in worst case
