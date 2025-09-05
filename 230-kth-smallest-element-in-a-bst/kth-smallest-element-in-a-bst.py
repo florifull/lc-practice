@@ -10,7 +10,7 @@ class Solution:
         node = root
         s = []
         curr = 0
-        while s or node:
+        while s or node: # just for first run time
             while node:
                 s.append(node)
                 node = node.left
