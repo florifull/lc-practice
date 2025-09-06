@@ -11,7 +11,8 @@ class KthLargest:
             heapq.heappush(self.nums, val)
         elif val >= self.nums[0]:
             # replace smallest val with new val
-            heapq.heappushpop(self.nums, val)
+            heapq.heappop(self.nums)
+            heapq.heappush(self.nums, val)
         return self.nums[0]
 
 # Your KthLargest object will be instantiated and called as such:
