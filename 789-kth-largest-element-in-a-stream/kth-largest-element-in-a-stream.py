@@ -10,10 +10,11 @@ class KthLargest:
         if len(self.nums) < self.k:
             heapq.heappush(self.nums, val)
         elif val >= self.nums[0]:
-            # replace smallest val with new val
+            # replace smallest val with new val (can also use heapq.heappushpop..)
             heapq.heappop(self.nums)
             heapq.heappush(self.nums, val)
         return self.nums[0]
+    # T: O(nlogk), S: O(k)
 
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)
