@@ -11,12 +11,13 @@ class Solution:
             iterations += 1
             if maxHeap: # take largest occurrence and use it
                 count = heapq.heappop(maxHeap) + 1 # really subtracting but since negs..
-                if count != 0:
+                if count != 0: # cooloff period is curr iter + cooldown..
                     qcooldown.append([count, iterations + n])
             if qcooldown:
                 lowestCooldown = qcooldown[0][1]
-                # we're ready to be removed again
+                # we're ready to be PREPARE to be removed again
                 if lowestCooldown <= iterations:
                     count, _ = qcooldown.popleft()
                     heapq.heappush(maxHeap, count)
         return iterations
+    # T: O(total_tasks), S: O(k) where k is # unique tasks
