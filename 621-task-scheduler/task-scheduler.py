@@ -1,23 +1,24 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
-        taskMap = collections.Counter(tasks)
-        maxHeap = [(-1 * v) for v in taskMap.values()]
+        cooldown = collections.deque()
+        counts = collections.Counter(tasks)
+        maxHeap = [(-1 * v) for v in counts.values()]
         heapq.heapify(maxHeap)
-        # ex: ["A","C","A","B","D","B"] -> [-2, -2, -1, -1]
-        qcooldown = collections.deque() # [count, cooloff]
-        iterations = 0
-
-        while maxHeap or qcooldown:
-            iterations += 1
-            if maxHeap: # take largest occurrence and use it
-                count = heapq.heappop(maxHeap) + 1 # really subtracting but since negs..
-                if count != 0: # cooloff period is curr iter + cooldown..
-                    qcooldown.append([count, iterations + n])
-            if qcooldown:
-                lowestCooldown = qcooldown[0][1]
-                # we're ready to be PREPARE to be removed again
-                if lowestCooldown <= iterations:
-                    count, _ = qcooldown.popleft()
+        
+        cycles = 0
+        while cooldown or maxHeap:
+            cycles += 1
+            # if we have anything ready to pop, take 'largest'
+            if maxHeap:
+                # pop the 'largest' occurrence and subtract (add)
+                occ = heapq.heappop(maxHeap) + 1
+                if abs(occ) > 0:
+                    # cycles rep round we're on, n is default cooldown time
+                    # stored in q as... remaining occurrence count : cooldown period
+                    cooldown.append([occ, cycles + n])
+            if cooldown:
+                # if something is almost ready to be used again
+                if cycles >= cooldown[0][1]:
+                    count, _ = cooldown.popleft()
                     heapq.heappush(maxHeap, count)
-        return iterations
-    # T: O(total_tasks), S: O(k) where k is # unique tasks
+        return cycles
