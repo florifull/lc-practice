@@ -22,4 +22,4 @@ class Solution:
                     localA = dfs(r, c)
                     if localA > maxArea: maxArea = localA
         return maxArea
-    #T: 
+    # T: O(r * c), S: O(r * c)
