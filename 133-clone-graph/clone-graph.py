@@ -21,5 +21,7 @@ class Solution:
             for nei in n.neighbors:
                 newNode.neighbors.append(dfs(nei))
             return newNode
-        return dfs(node)
+        #return dfs(node)
+        dfs(node)
+        return oldToNew[node]
     # T: O(v + e), S: O(v + 3)
