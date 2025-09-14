@@ -20,3 +20,4 @@ class Solution:
                     dfs(r, c)
                     islands += 1
         return islands
+    # T: O(R * C), S: O(R * C)
