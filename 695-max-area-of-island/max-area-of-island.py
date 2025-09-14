@@ -5,19 +5,21 @@ class Solution:
         rows, cols = len(grid), len(grid[0])
         dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
 
-        def dfs(r, c, localArea):
+        def dfs(r, c):
+            if (r not in range(rows) or c not in range(cols)
+                or grid[r][c] != 1 or (r, c) in visited):
+                return 0
             visited.add((r, c))
-            localArea = 1
+            localA = 1
             for roff, coff in dirs:
                 # check adjacents
-                if (r+roff in range(rows) and c+coff in range(cols)
-                    and grid[r+roff][c+coff] == 1 and (r+roff, c+coff) not in visited):
-                    localArea += dfs(r+roff, c+coff, localArea)
-            return localArea
-        
+                localA += dfs(r+roff, c+coff)
+            return localA
+
         for r in range(rows):
             for c in range(cols):
                 if grid[r][c] == 1 and (r, c) not in visited:
-                    localA = dfs(r, c, 0)
+                    localA = dfs(r, c)
                     if localA > maxArea: maxArea = localA
         return maxArea
+    #T: 
