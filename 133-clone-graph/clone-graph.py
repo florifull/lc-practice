@@ -10,7 +10,6 @@ from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node: return None
-        #if not node.neighbors: return [node.neighbors]
 
         oldToNew = {}
 
@@ -23,3 +22,4 @@ class Solution:
                 newNode.neighbors.append(dfs(nei))
             return newNode
         return dfs(node)
+    # T: O(v + e), S: O(v + 3)
