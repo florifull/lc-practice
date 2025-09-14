@@ -23,3 +23,4 @@ class Solution:
                 localArr.pop()
         dfs(0, [])
         return res
+    # T: O(4^n * n), S: O(n)
