@@ -32,3 +32,4 @@ class Solution:
                         q.append((newR, newC))
             minutes += 1
         return -1 if rotten != totalOranges else minutes
+    # T: O(r * c), S: O(r * c)
