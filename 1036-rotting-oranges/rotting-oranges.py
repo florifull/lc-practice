@@ -19,7 +19,7 @@ class Solution:
         if rotten == 0 and fresh: return -1
         if totalOranges == 0 or fresh == 0: return 0
         # bfs
-        while q:
+        while q and rotten != totalOranges:
             for _ in range(len(q)):
                 r, c = q.popleft()
                 for roff, coff in dirs:
@@ -31,4 +31,4 @@ class Solution:
                         rotten += 1
                         q.append((newR, newC))
             minutes += 1
-        return -1 if rotten != totalOranges else minutes-1
+        return -1 if rotten != totalOranges else minutes
