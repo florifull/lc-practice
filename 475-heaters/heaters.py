@@ -10,7 +10,7 @@ class Solution:
         for h in houses:
             while heaters[r] < h:
                 r += 1
-            minRadius = min(h - heaters[r-1], heaters[r] - h)
+            minRadius = min(abs(h - heaters[r-1]), abs(heaters[r] - h))
             radius = max(radius, minRadius)
         return radius
     #     houses_to_radius = {} # house : radius (abs(house - heater))
