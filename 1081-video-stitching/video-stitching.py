@@ -16,3 +16,4 @@ class Solution:
             prevStart = newStart
             hops += 1
         return hops if prevStart >= time else -1
+    # T: O(nlogn), S: O(1)
