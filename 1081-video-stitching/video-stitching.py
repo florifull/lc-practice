@@ -1,32 +1,27 @@
 class Solution:
     def videoStitching(self, clips: List[List[int]], time: int) -> int:
-        # Store the furthest end point reachable from each starting position
-        furthest_reach = [0] * time
-      
-        # Build the furthest reach array from all clips
-        for start, end in clips:
-            # Only consider clips that start before the target time
-            if start < time:
-                furthest_reach[start] = max(furthest_reach[start], end)
-      
-        # Initialize variables for the greedy algorithm
-        num_clips = 0  # Number of clips used
-        max_reach = 0   # Maximum position we can reach so far
-        prev_end = 0    # End position of the last selected clip
-      
-        # Iterate through each position in the time interval
-        for current_pos, furthest_from_here in enumerate(furthest_reach):
-            # Update the maximum reachable position
-            max_reach = max(max_reach, furthest_from_here)
-          
-            # If we can't reach beyond current position, there's a gap
-            if max_reach <= current_pos:
+        clips.sort()
+        
+        count = 0
+        end = 0  # Represents the current furthest reach
+        i = 0
+        
+        while end < time:
+            new_end = end
+            
+            # Find the best clip to make the next jump
+            while i < len(clips) and clips[i][0] <= end:
+                new_end = max(new_end, clips[i][1])
+                i += 1
+            
+            # If no progress was made, it's impossible to stitch
+            if new_end == end:
                 return -1
-          
-            # If we've reached the end of the previous clip's coverage
-            if prev_end == current_pos:
-                # Select a new clip that extends furthest
-                num_clips += 1
-                prev_end = max_reach
-      
-        return num_clips
+            
+            # Make the jump and increment the count
+            end = new_end
+            count += 1
+            
+        return count
+
+# [[0,2], [1,5], [1,9],[4,6],[5,9],[8,10]]
