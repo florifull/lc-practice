@@ -1,26 +1,18 @@
 class Solution:
     def videoStitching(self, clips: List[List[int]], time: int) -> int:
         clips.sort()
-        
-        count = 0
-        end = 0  # Represents the current furthest reach
+        hops = 0
+        prevStart = newStart = 0
+        # [[0,2],[0, 1],[1,5],[1, 9],[4,6],[5,9],[8,10]]
+
+        # [[0,0],[0,6],[1,8],[2,3],[4,5],[5,7],[5,10],[7,10]]
         i = 0
-        # [[0,2], [1,5], [1,9],[4,6],[5,9],[8,10]]
-        
-        while end < time:
-            new_end = end
-            
-            # Find the best clip to make the next jump
-            while i < len(clips) and clips[i][0] <= end:
-                new_end = max(new_end, clips[i][1])
+        while i < len(clips) and prevStart < time:
+            while i < len(clips) and clips[i][0] <= prevStart:
+                # tells us how far we can hop to for said start..
+                newStart = max(newStart, clips[i][1])
                 i += 1
-            
-            # If no progress was made, it's impossible to stitch
-            if new_end == end:
-                return -1
-            
-            # Make the jump and increment the count
-            end = new_end
-            count += 1
-            
-        return count
+            if prevStart == newStart: return -1
+            prevStart = newStart
+            hops += 1
+        return hops if prevStart >= time else -1
