@@ -5,6 +5,7 @@ class Solution:
         count = 0
         end = 0  # Represents the current furthest reach
         i = 0
+        # [[0,2], [1,5], [1,9],[4,6],[5,9],[8,10]]
         
         while end < time:
             new_end = end
@@ -23,5 +24,3 @@ class Solution:
             count += 1
             
         return count
-
-# [[0,2], [1,5], [1,9],[4,6],[5,9],[8,10]]
