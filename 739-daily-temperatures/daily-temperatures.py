@@ -1,11 +1,12 @@
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        answer = [0] * len(temperatures)
-        stack = []  # monotonic decreasing (only push vals less than top)
+        # [73,74,75,71,69,72,76,73]
+        # [[75, 2], 71, [69, 4]] -> [temp, idx]
+        res = [0] * len(temperatures)
+        stack = []
         for i, t in enumerate(temperatures):
             while stack and stack[-1][0] < t:
-                stack_temp, stack_i = stack.pop()
-                answer[stack_i] = i - stack_i
+                temp, idx = stack.pop()
+                res[idx] = i - idx
             stack.append([t, i])
-        return answer
-    # T: O(n), S: O(n)
+        return res
