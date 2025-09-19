@@ -1,10 +1,10 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        if len(strs) == 0: return [strs]
-        anagrams = defaultdict(list)
-        for w in strs:
-            count = [0] * 26
-            for c in w:
-                count[ord(c) - ord('a')] += 1
-            anagrams[tuple(count)].append(w)
-        return [v for v in anagrams.values()]
+        occs_to_words = collections.defaultdict(list)
+        for s in strs:
+            chars = [0] * 26
+            for c in s:
+                chars[ord(c) - ord('a')] += 1
+            occs_to_words[tuple(chars)].append(s)
+        return [v for v in occs_to_words.values()]
+    # T: O(n * s), S: O(n)
