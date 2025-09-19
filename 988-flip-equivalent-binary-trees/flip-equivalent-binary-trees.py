@@ -13,7 +13,9 @@ class Solution:
         if root1.val != root2.val: return False
 
         left = self.flipEquiv(root1.left, root2.left)
-        leftFlip = self.flipEquiv(root1.left, root2.right)
         right = self.flipEquiv(root1.right, root2.right)
+        leftFlip = self.flipEquiv(root1.left, root2.right)
         rightFlip = self.flipEquiv(root1.right, root2.left)
+        # either SAME or FLIPPED tree fully @ said level..
         return (left and right) or (leftFlip and rightFlip)
+    # T: O(n), S: O(n)
