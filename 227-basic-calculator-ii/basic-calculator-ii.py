@@ -34,3 +34,4 @@ class Solution:
                 operator = s[i]
             i += 1
         return res
+    # T: O(n), S: O(1)
