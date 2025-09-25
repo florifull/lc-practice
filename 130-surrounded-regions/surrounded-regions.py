@@ -42,3 +42,4 @@ class Solution:
             for c in range(cols):
                 if (r, c) not in visited and board[r][c] == 'O':
                     dfs(r, c)
+    # T: O(m * n), S: O(m * n)
