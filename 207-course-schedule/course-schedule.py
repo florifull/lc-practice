@@ -4,6 +4,7 @@ class Solution:
         for c, pre in prerequisites:
             prereq[c].append(pre)
         # [[1,0],[0,1]] => {1->[0], 0->[1]}
+        # [[1, 0], [0, 3]] => {1-> [0], 0->[3]}, 3 has no prereqs so not in map...
         visited = set()
         def dfs(c):
             if c not in prereq: return True
@@ -15,6 +16,7 @@ class Solution:
             prereq[c] = []
             return True
         for i in range(numCourses):
-            if not dfs(i): return False
+            if i in prereq:
+                if not dfs(i): return False
         return True
     # T: O(V + E), S: O(V + E)
