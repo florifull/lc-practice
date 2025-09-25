@@ -15,8 +15,7 @@ class Solution:
             visited.remove(c)
             prereq[c] = []
             return True
-        for i in range(numCourses):
-            if i in prereq:
-                if not dfs(i): return False
+        for c in prereq.keys():
+            if not dfs(c): return False
         return True
     # T: O(V + E), S: O(V + E)
