@@ -22,3 +22,4 @@ class Solution:
             dfs(r, cols-1, heights[r][cols-1], atl)
         # return intersection of both lists
         return list(pac & atl)
+    # T: O(m * n), S: O(m * n)
