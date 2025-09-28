@@ -4,20 +4,21 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         rows, cols = len(matrix), len(matrix[0])
-        def makeZero(r, c):
-            # change entire column
-            for row in range(rows):
-                if matrix[row][c] != 0: matrix[row][c] = '!'
-            # change entire row
-            for col in range(cols):
-                if matrix[r][col] != 0: matrix[r][col] = '!'
+        rowzero, colzero = [0] * rows, [0] * cols
         
         for r in range(rows):
             for c in range(cols):
                 if matrix[r][c] == 0:
-                    makeZero(r, c)
+                    rowzero[r], colzero[c] = 1, 1 # 1 being "true" like a 0 has occurred here..
         # flip all non zeroes in zero occurring rows/cols (!'s) to 0's!
         for r in range(rows):
-            for c in range(cols):
-                if matrix[r][c] == '!': matrix[r][c] = 0
-    # T: O (m * n), S: O(1)
+            if rowzero[r] == 1:
+                # set entire row to 0's
+                matrix[r] = [0] * cols
+        for c in range(cols):
+            if colzero[c] == 1:
+                for r in range(rows):
+                    # set entire column to 0's
+                    matrix[r][c] = 0
+
+    # T: O (m * n), S: O(m * n)
