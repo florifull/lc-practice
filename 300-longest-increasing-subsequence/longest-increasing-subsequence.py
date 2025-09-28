@@ -7,3 +7,4 @@ class Solution:
                 if nums[i] > nums[j]:
                     res[i] = max(res[i], 1 + res[j])
         return max(res)
+    # T: O(n^2), S: O(n) -> tabulation approach
