@@ -4,21 +4,29 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         rows, cols = len(matrix), len(matrix[0])
-        rowzero, colzero = [0] * rows, [0] * cols
-        
+        topLeftRowZero = False
         for r in range(rows):
             for c in range(cols):
                 if matrix[r][c] == 0:
-                    rowzero[r], colzero[c] = 1, 1 # 1 being "true" like a 0 has occurred here..
-        # flip all non zeroes in zero occurring rows/cols (!'s) to 0's!
-        for r in range(rows):
-            if rowzero[r] == 1:
-                # set entire row to 0's
-                matrix[r] = [0] * cols
-        for c in range(cols):
-            if colzero[c] == 1:
-                for r in range(rows):
-                    # set entire column to 0's
-                    matrix[r][c] = 0
-
-    # T: O (m * n), S: O(m * n)
+                    if r == 0: matrix[0][0] = 0
+                    if c == 0: topLeftRowZero = True
+                    else:
+                        # set top boundary
+                        matrix[0][c] = 0
+                        # set left boundary
+                        matrix[r][0]  = 0
+        # traverse through inner matrix (not touching borders)
+        for r in range(1, rows):
+            for c in range(1, cols):
+                if matrix[r][c] != 0:
+                    # check top border and left border
+                    if matrix[0][c] == 0 or matrix[r][0] == 0: matrix[r][c] = 0
+        # only traverse through borders if top left is 0..
+        if matrix[0][0] == 0:
+            # traverse through top border
+            for c in range(cols):
+                if matrix[0][c] != 0: matrix[0][c] = 0
+        if topLeftRowZero:
+            # traverse through leftmost border
+            for r in range(rows):
+                if matrix[r][0] != 0: matrix[r][0] = 0
