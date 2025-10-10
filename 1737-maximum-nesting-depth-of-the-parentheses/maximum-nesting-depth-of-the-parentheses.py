@@ -1,11 +1,10 @@
 class Solution:
     def maxDepth(self, s: str) -> int:
-        stack = []
+        openers = 0
         maxDepth = 0
         for c in s:
             if c == '(':
-                stack.append('(')
-                maxDepth = max(maxDepth, len(stack))
-            elif c == ')':
-                if stack: stack.pop()
+                openers += 1
+                maxDepth = max(maxDepth, openers)
+            elif c == ')': openers -= 1
         return maxDepth
