@@ -4,3 +4,4 @@ class Solution:
         for i, val in enumerate(index):
             res.insert(index[i], nums[i])
         return res
+    # T: O(n^2), S: O(1)
