@@ -11,9 +11,8 @@ class Solution:
                 elif coordVal == '*':
                     e_pt = [r, c-1]
                 else: # stone found
-                    e_r, e_c = e_pt[0], e_pt[1]
-                    boxGrid[e_r][e_c], boxGrid[r][c] = coordVal, boxGrid[e_r][e_c]
-                    e_pt = [e_r, e_c-1]
+                    boxGrid[e_pt[0]][e_pt[1]], boxGrid[r][c] = coordVal, boxGrid[e_pt[0]][e_pt[1]]
+                    e_pt = [e_pt[0], e_pt[1]-1]
         # traverse from (bottom) left to right -> row, col -> col, row
         newBox = [['' for r in range(rows)] for c in range(cols)]
         # now I need to traverse new matrix and fill in corresponding rotated points
