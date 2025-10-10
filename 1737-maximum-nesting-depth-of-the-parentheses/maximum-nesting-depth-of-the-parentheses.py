@@ -8,3 +8,4 @@ class Solution:
                 maxDepth = max(maxDepth, openers)
             elif c == ')': openers -= 1
         return maxDepth
+    # T: O(n), S: O(1)
