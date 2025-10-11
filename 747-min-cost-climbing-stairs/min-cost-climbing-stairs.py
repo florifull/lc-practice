@@ -6,4 +6,4 @@ class Solution:
             currCost = min(cost[i]+prev, cost[i]+prevprev)
             prevprev, prev = prev, currCost
         return min(prevprev, prev)
-    # T: O(n), S: O(n)
+    # T: O(n), S: O(1)
