@@ -8,4 +8,5 @@ class Solution:
             else:
                 prevSum += nums[i]
             globalSum = max(globalSum, prevSum)
-        return globalSum if len(nums) > 1 else nums[0]
+        return globalSum
+    # T: O(n), S: O(1) -> Kadane's algo
