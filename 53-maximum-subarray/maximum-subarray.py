@@ -4,7 +4,7 @@ class Solution:
         globalSum = float('-inf')
         for i in range(1, len(nums)):
             globalSum = max(globalSum, prevSum)
-            if prevSum < 0 and nums[i] > prevSum:
+            if prevSum < 0:
                 prevSum = nums[i]
             else:
                 prevSum += nums[i]
