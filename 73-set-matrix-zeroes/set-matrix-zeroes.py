@@ -4,29 +4,21 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         rows, cols = len(matrix), len(matrix[0])
-        topLeftRowZero = False
+        # denote ea non zero in a 0 row/col with a '*'
         for r in range(rows):
             for c in range(cols):
                 if matrix[r][c] == 0:
-                    if r == 0: matrix[0][0] = 0
-                    if c == 0: topLeftRowZero = True
-                    else:
-                        # set top boundary
-                        matrix[0][c] = 0
-                        # set left boundary
-                        matrix[r][0]  = 0
-        # traverse through inner matrix (not touching borders)
-        for r in range(1, rows):
-            for c in range(1, cols):
-                if matrix[r][c] != 0:
-                    # check top border and left border
-                    if matrix[0][c] == 0 or matrix[r][0] == 0: matrix[r][c] = 0
-        # only traverse through borders if top left is 0..
-        if matrix[0][0] == 0:
-            # traverse through top border
+                    # mark all rows to be flipped (*)
+                    for row in range(rows):
+                        if matrix[row][c] != 0 and matrix[row][c] != '*':
+                            matrix[row][c] = '*'
+                    # mark all cols to be flipped (*)
+                    for col in range(cols):
+                        if matrix[r][col] != 0 and matrix[r][col] != '*':
+                            matrix[r][col] = '*'
+        # we've marked all coords that need to be flipped to 0's - now find em!
+        for r in range(rows):
             for c in range(cols):
-                if matrix[0][c] != 0: matrix[0][c] = 0
-        if topLeftRowZero:
-            # traverse through leftmost border
-            for r in range(rows):
-                if matrix[r][0] != 0: matrix[r][0] = 0
+                if matrix[r][c] == '*':
+                    matrix[r][c] = 0
+    # T: O(m * n + (n + m)), S: O(1)
