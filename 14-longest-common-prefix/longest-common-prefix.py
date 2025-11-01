@@ -6,4 +6,4 @@ class Solution:
             while not pre.startswith(prefix):
                 prefix = prefix[:-1]
         return prefix
-    # T: O(m * n), S: O(1)
+    # T: O(s), S: O(1) - where s is the sum of all characters
