@@ -9,4 +9,4 @@ class Solution:
             if prod == res[p3] * 3: p3 += 1
             if prod == res[p5] * 5: p5 += 1
         return res[-1]
-    # T: O(n), S: O(1)
+    # T: O(n), S: O(n)
