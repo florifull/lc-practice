@@ -1,55 +1,47 @@
-class Node:
-    def __init__(self, value=None, key=None, prev=None, nxt=None):
-        self.value, self.key = value, key
-        self.prev, self.next = prev, nxt
+class Node():
+    def __init__(self, key=0, val=0):
+        self.key, self.val = key, val
+        self.prev = self.next = None
 
 class LRUCache:
-
     def __init__(self, capacity: int):
+        self.cache = {} #key:num , value:node object
         self.capacity = capacity
-        self.keyToNode = {}  # keys to node objects
-        self.LRU = Node()  # Head sentinel
-        self.MRU = Node()  # Tail sentinel
-        self.LRU.next, self.MRU.prev = self.MRU, self.LRU
+        # left = LRU, right = MRU
+        self.left, self.right = Node(), Node()
+        self.left.next, self.right.prev = self.right, self.left
 
-    def _remove_node(self, node):
-        prev_node = node.prev
-        next_node = node.next
-        prev_node.next = next_node
-        next_node.prev = prev_node
+    def remove(self, node):
+        # remove node (passed in LRU node)
+        prev, nxt = node.prev, node.next
+        prev.next, nxt.prev = nxt, prev
 
-    def _add_to_mru(self, node):
-        prev_mru = self.MRU.prev
-        prev_mru.next = node
-        node.prev = prev_mru
-        node.next = self.MRU
-        self.MRU.prev = node
+
+    def insert(self, node):
+        # insert at right
+        prev, nxt = self.right.prev, self.right
+        prev.next = nxt.prev = node
+        node.next, node.prev = nxt, prev
 
     def get(self, key: int) -> int:
-        if key in self.keyToNode:
-            node = self.keyToNode[key]
-            # Move the accessed node to the MRU position.
-            self._remove_node(node)
-            self._add_to_mru(node)
-            return node.value
+        if key in self.cache:
+            # make this node the MRU
+            self.remove(self.cache[key])
+            self.insert(self.cache[key])
+            return self.cache[key].val
         return -1
 
     def put(self, key: int, value: int) -> None:
-        if key in self.keyToNode:
-            # If key exists, update value and move to MRU.
-            node = self.keyToNode[key]
-            node.value = value
-            self._remove_node(node)
-            self._add_to_mru(node)
-        else:
-            # If key doesn't exist, create a new node.
-            new_node = Node(value, key)
-            self.keyToNode[key] = new_node
-            self._add_to_mru(new_node)
-            
-            # Check for capacity and remove LRU if necessary.
-            if len(self.keyToNode) > self.capacity:
-                # The LRU node is the one right after the LRU sentinel.
-                lru_node = self.LRU.next
-                self._remove_node(lru_node)
-                del self.keyToNode[lru_node.key]
+        if key in self.cache:
+            self.remove(self.cache[key])
+        newNode = Node(key, value)
+        self.cache[key] = newNode
+        self.insert(newNode)
+        if len(self.cache) > self.capacity:
+            lru = self.left.next
+            self.remove(lru)
+            del self.cache[lru.key]
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
