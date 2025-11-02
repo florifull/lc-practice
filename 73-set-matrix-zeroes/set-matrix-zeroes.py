@@ -23,3 +23,4 @@ class Solution:
         if firstColZero:
             for r in range(rows):
                 matrix[r][0] = 0
+    # T: O(m * n), S: O(1)
