@@ -1,10 +1,10 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         if not s: return 0
-        longest = 1
-        window = set({s[0]})
+        longest = float('-inf')
+        window = set()
         l = 0
-        for r in range(1, len(s)):
+        for r in range(len(s)):
             while s[r] in window:
                 window.remove(s[l])
                 l += 1
