@@ -1,24 +1,25 @@
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
-        """
-        Do not return anything, modify matrix in-place instead.
-        """
         rows, cols = len(matrix), len(matrix[0])
-        # denote ea non zero in a 0 row/col with a '*'
-        for r in range(rows):
-            for c in range(cols):
+        firstRowZero = any(matrix[0][c] == 0 for c in range(cols))
+        firstColZero = any(matrix[r][0] == 0 for r in range(rows))
+
+        # traverse inner matrix and check for 0's
+        for r in range(1, rows):
+            for c in range(1, cols):
                 if matrix[r][c] == 0:
-                    # mark all rows to be flipped (*)
-                    for row in range(rows):
-                        if matrix[row][c] != 0 and matrix[row][c] != '*':
-                            matrix[row][c] = '*'
-                    # mark all cols to be flipped (*)
-                    for col in range(cols):
-                        if matrix[r][col] != 0 and matrix[r][col] != '*':
-                            matrix[r][col] = '*'
-        # we've marked all coords that need to be flipped to 0's - now find em!
-        for r in range(rows):
-            for c in range(cols):
-                if matrix[r][c] == '*':
+                    matrix[0][c], matrix[r][0] = 0, 0
+        
+        # traverse inner matrix and change appropriate cells to 0's
+        for r in range(1, rows):
+            for c in range(1, cols):
+                # check top row and top col for 0
+                if matrix[0][c] == 0 or matrix[r][0] == 0:
                     matrix[r][c] = 0
-    # T: O(m * n + (n + m)), S: O(1)
+        # traverse through borders and make 0's appropriately
+        if firstRowZero:
+            for c in range(cols):
+                matrix[0][c] = 0
+        if firstColZero:
+            for r in range(rows):
+                matrix[r][0] = 0
