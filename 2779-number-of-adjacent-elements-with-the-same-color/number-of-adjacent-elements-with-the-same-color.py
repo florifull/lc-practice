@@ -13,14 +13,14 @@ class Solution:
             # new val isn't equal to old val
             else:
                 # if neighbors are 0's - ignore
-                if modified_idx - 1 in range(len(counts)):
+                if modified_idx - 1 >= 0:
                     leftNei = counts[modified_idx-1]
                     if leftNei == 0:
                         pass
                     else:
                         if leftNei == oldVal: pairs -= 1
                         elif leftNei == newVal: pairs += 1
-                if modified_idx + 1 in range(len(counts)):
+                if modified_idx + 1 < len(counts):
                     rightNei = counts[modified_idx+1]
                     if rightNei == 0:
                         pass
@@ -29,4 +29,4 @@ class Solution:
                         elif rightNei == newVal: pairs += 1
                 res[i] = res[i-1] + pairs
         return res
-    # T: O(q * n), S: O(q)
+    # T: O(q), S: O(n+q)
