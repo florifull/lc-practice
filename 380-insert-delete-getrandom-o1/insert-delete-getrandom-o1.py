@@ -16,7 +16,8 @@ class RandomizedSet:
         occ_idx = self.map[val]
         # since removing is O(n), we can pop in O(1), so replace last ele with target
         self.items[occ_idx], self.items[-1] = self.items[-1], self.items[occ_idx]
-        self.map[self.items[occ_idx]] = occ_idx
+        replaced_val = self.items[occ_idx]
+        self.map[replaced_val] = occ_idx
         remove_val = self.items.pop()
         del self.map[remove_val]
         return True
