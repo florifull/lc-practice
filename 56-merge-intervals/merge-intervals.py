@@ -1,20 +1,22 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        if len(intervals) == 1: return [intervals[0]]
+        if len(intervals) == 1: return intervals
+        # starts: [1, 2, 8, 15]
+        # ends:   [3, 6, 10, 18]
 
-        intervals.sort()
-        res = [[intervals[0][0], intervals[0][1]]] # initially holds first interval
-        i = 1
-        prevStart = prevEnd = 0
-        while i < len(intervals):
-            prevStart, prevEnd = res[-1][0], res[-1][1]
+        # [[1, 10], [2, 3], [4, 5]]
+        stack = []
+        intervals.sort(key=lambda x:x[0])
+        for i in range(len(intervals)):
+            if i == 0:
+                stack.append([intervals[i][0], intervals[i][1]])
+                continue
+            prevStart, prevEnd = stack.pop()
             currStart, currEnd = intervals[i][0], intervals[i][1]
-            if currStart <= prevEnd: # found an overlap / time conflict..
-                # create a new interval..
-                res.pop()
-                newStart, newEnd = prevStart, max(prevEnd, currEnd)
-                res.append([newStart, newEnd])
+            if currStart <= prevEnd:
+                maxEnd = max(prevEnd, currEnd)
+                stack.append([prevStart, maxEnd])
             else:
-                res.append([currStart, currEnd])
-            i += 1
-        return res
+                stack.append([prevStart, prevEnd])
+                stack.append([currStart, currEnd])
+        return stack
