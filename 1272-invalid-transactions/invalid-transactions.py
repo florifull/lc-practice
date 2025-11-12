@@ -23,3 +23,4 @@ class Solution:
                 if invalid:
                     res.append(trans)
         return res
+    # T: O(n^2), S: O(n)
