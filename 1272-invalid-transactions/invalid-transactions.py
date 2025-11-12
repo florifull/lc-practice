@@ -2,12 +2,13 @@ class Solution:
     def invalidTransactions(self, transactions: List[str]) -> List[str]:
         name_to_transactions = collections.defaultdict(list)
         res = []
-        
+
         # Group transactions by name (store original string + parsed data)
         for trans in transactions:
             data = trans.split(',')
             name, time, amount, city = data[0], int(data[1]), int(data[2]), data[3]
             name_to_transactions[name].append((trans, time, amount, city))
+            # storing as name: ('alice,20,800,mtv', 20, 800, mtv) etc...
         
         # Check each transaction
         for name, trans_list in name_to_transactions.items():
