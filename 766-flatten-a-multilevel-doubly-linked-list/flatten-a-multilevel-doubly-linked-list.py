@@ -25,3 +25,4 @@ class Solution:
             prev = curr
         head.prev = None
         return dummy.next
+    # T: O(n), S: O(n)
