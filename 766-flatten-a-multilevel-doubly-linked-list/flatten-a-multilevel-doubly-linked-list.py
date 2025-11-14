@@ -14,14 +14,14 @@ class Solution:
         dummy = Node()
         dummy.next = head
         stack = [head]
-        curr = dummy
+        prev = dummy
         while stack:
-            node = stack.pop()
-            nxt, child = node.next, node.child
-            curr.next, node.prev = node, curr
-            node.child = None
-            if nxt: stack.append(nxt)
-            if child: stack.append(child)
-            curr = curr.next
-        dummy.next.prev = None
+            curr = stack.pop()
+            prev.next = curr
+            if curr.next: stack.append(curr.next)
+            if curr.child: stack.append(curr.child)
+            curr.child = None
+            curr.prev = prev
+            prev = curr
+        head.prev = None
         return dummy.next
