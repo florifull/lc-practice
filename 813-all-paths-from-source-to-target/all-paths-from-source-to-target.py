@@ -12,11 +12,7 @@ class Solution:
                 dfs(path, n)
                 path.pop()
             return
-        
         path = [0]
-        for nval in graph[0]:
-            path.append(nval)
-            dfs(path, nval)
-            path.pop()
+        dfs(path, 0)
         return paths
-    # T: O(m * n), S: O(m * n)
+    # T: O(2^n * n), S: O(n)
