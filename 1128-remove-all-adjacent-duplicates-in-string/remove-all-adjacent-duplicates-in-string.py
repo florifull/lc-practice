@@ -8,3 +8,4 @@ class Solution:
                 continue
             stack.append(s[i])
         return ''.join(stack)
+    # T: O(n), S: O(n)
