@@ -6,12 +6,11 @@ class Solution:
         for i in range(1, len(s)):
             # if top of stack is equal to THIS char
             if stack and stack[-1][0] == s[i]:
-                if stack[-1][1] >= k-1:
-                    stack.pop()
-                    continue
-                # not at removal threshold
                 stack[-1][1] += 1
+                if stack[-1][1] >= k:
+                    stack.pop()
             else:
                 stack.append([s[i], 1])
         return ''.join(char * count for char, count in stack)
+    # T: O(n), S: O(n * k)
             
