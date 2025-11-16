@@ -5,3 +5,4 @@ class Solution:
             new_w_map = collections.Counter(new_w)
             if max(new_w_map.values()) == min(new_w_map.values()): return True
         return False
+    # T: O(n^2), S: O(n)
