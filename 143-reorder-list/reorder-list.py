@@ -6,11 +6,7 @@
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
         if not head or not head.next: return None
-        # find end node
-        p, c = head, head.next
-        while c:
-            p, c = p.next, c.next
-        # p points to last node..
+
         # find middle node (s)
         s, f = head, head.next
         while f and f.next:
@@ -29,9 +25,3 @@ class Solution:
             head.next, prev.next = prev, head.next
             phead, psecond = head, prev
             head, prev = tmp, tmp2
-        if head:
-            if psecond:
-                psecond.next = head
-        if prev:
-            if phead:
-                phead.next = prev
