@@ -5,22 +5,33 @@
 #         self.next = next
 class Solution:
     def reorderList(self, head: Optional[ListNode]) -> None:
-        m, f = head, head.next
+        if not head or not head.next: return None
+        # find end node
+        p, c = head, head.next
+        while c:
+            p, c = p.next, c.next
+        # p points to last node..
+        # find middle node (s)
+        s, f = head, head.next
         while f and f.next:
-            m, f = m.next, f.next.next
-        # s is now set at middle
+            s, f = s.next, f.next.next
+        second_half_head = s.next
+        s.next = None # split lists
         prev = None
-        # reverse 2nd half LL
-        while m:
-            tmp = m.next
-            m.next = prev
-            prev, m = m, tmp
-        # reorder
-        l, r = head, prev
-        # r will go Null if it passes middle, & even lists l & r will exit if overlap
-        while l and r and l != r:
-            tmpL, tmpR = l.next, r.next
-            l.next = r
-            l = tmpL
-            r.next = l
-            r = tmpR
+        while second_half_head:
+            tmp = second_half_head.next
+            second_half_head.next = prev
+            prev, second_half_head = second_half_head, tmp
+        phead, psecond = head, prev
+        while head and prev:
+            tmp = head.next
+            tmp2 = prev.next
+            head.next, prev.next = prev, head.next
+            phead, psecond = head, prev
+            head, prev = tmp, tmp2
+        if head:
+            if psecond:
+                psecond.next = head
+        if prev:
+            if phead:
+                phead.next = prev
