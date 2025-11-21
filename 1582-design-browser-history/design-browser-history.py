@@ -3,7 +3,7 @@ class BrowserHistory:
     def __init__(self, homepage: str):
         self.history = [homepage]
         self.curr = 0
-        self.end = 0
+        self.end = 0 # represents last place we can go forward until
 
     def visit(self, url: str) -> None:
         self.curr += 1
@@ -11,7 +11,7 @@ class BrowserHistory:
             self.history[self.curr] = url
         else:
             self.history.append(url)
-        self.end = self.curr
+        self.end = self.curr # reset accessible cutoff (via forward)
         
     def back(self, steps: int) -> str:
         access_idx = self.curr - steps
