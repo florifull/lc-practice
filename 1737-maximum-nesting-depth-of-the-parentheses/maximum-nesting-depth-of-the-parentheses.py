@@ -9,4 +9,4 @@ class Solution:
                 current_depth -= 1
             maxD = max(maxD, current_depth)
         return maxD
-    # T: O(n), S: O(!)
+    # T: O(n), S: O(1)
