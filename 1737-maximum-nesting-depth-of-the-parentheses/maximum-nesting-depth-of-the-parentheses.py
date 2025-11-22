@@ -1,12 +1,12 @@
 class Solution:
     def maxDepth(self, s: str) -> int:
-        stack = []
+        current_depth = 0
         maxD = 0
         for i in range(len(s)):
             if s[i] == '(':
-                stack.append('(')
+                current_depth += 1
             elif s[i] == ')':
-                if stack:
-                    stack.pop()
-            maxD = max(maxD, len(stack))
+                current_depth -= 1
+            maxD = max(maxD, current_depth)
         return maxD
+    # T: O(n), S: O(!)
