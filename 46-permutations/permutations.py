@@ -1,16 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        # permutations -> n! - where n is the length of nums
         res = []
-
-        def dfs(localSol, choices):
-            if len(localSol) == len(nums):
-                res.append(localSol[:])
+        def dfs(ans, arr):
+            if len(ans) == len(nums):
+                res.append(ans[:])
                 return
-            # decisions
-            for i in range(len(choices)):
-                localSol.append(choices[i])
-                dfs(localSol, choices[:i] + choices[i+1:])
-                localSol.pop()
+            for i in range(len(arr)):
+                ans.append(arr[i])
+                dfs(ans, arr[:i]+arr[i+1:])
+                ans.pop()
+            return
         dfs([], nums)
         return res
-    # T: O(n * n!), S: O(n^2)
+    # T: O(n * n!), S: O(n * n!)
