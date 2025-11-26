@@ -3,14 +3,15 @@ class Solution:
         rows, cols = len(grid), len(grid[0])
         visited = set()
         islands = 0
-        dirs = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+
+        adj = [[-1, 0], [1, 0], [0, 1], [0, -1]]
         def dfs(r, c):
-            if (r not in range(rows) or c not in range(cols)
-                or (r, c) in visited or grid[r][c] != '1'):
-                return
             visited.add((r, c))
-            for dr, dc in dirs:
-                dfs(r+dr, c+dc)
+            for dr, dc in adj:
+                if (r+dr in range(rows) and c+dc in range(cols)
+                    and (r+dr, c+dc) not in visited and grid[r+dr][c+dc] == '1'):
+                    dfs(r+dr, c+dc)
+            return
 
         for r in range(rows):
             for c in range(cols):
@@ -18,3 +19,4 @@ class Solution:
                     dfs(r, c)
                     islands += 1
         return islands
+    # T: O(m * n), S: O(m * n)
