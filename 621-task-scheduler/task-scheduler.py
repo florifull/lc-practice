@@ -1,24 +1,24 @@
 class Solution:
     def leastInterval(self, tasks: List[str], n: int) -> int:
+        tasksInfo = collections.Counter(tasks)
+        storage = [[-1*occ, letter, 0] for letter, occ in tasksInfo.items()]
+        heapq.heapify(storage)
         cooldown = collections.deque()
-        counts = collections.Counter(tasks)
-        maxHeap = [(-1 * v) for v in counts.values()]
-        heapq.heapify(maxHeap)
-        
-        cycles = 0
-        while cooldown or maxHeap:
-            cycles += 1
-            # if we have anything ready to pop, take 'largest'
-            if maxHeap:
-                # pop the 'largest' occurrence and subtract (add)
-                occ = heapq.heappop(maxHeap) + 1
-                if abs(occ) > 0:
-                    # cycles rep round we're on, n is default cooldown time
-                    # stored in q as... remaining occurrence count : cooldown period
-                    cooldown.append([occ, cycles + n])
+
+        i = 0 # intervals
+        while storage or cooldown:
+            i += 1
             if cooldown:
-                # if something is almost ready to be used again
-                if cycles >= cooldown[0][1]:
-                    count, _ = cooldown.popleft()
-                    heapq.heappush(maxHeap, count)
-        return cycles
+                # check if anything is cooled down..[char, occ, exp]
+                while cooldown and cooldown[0][2] <= i:
+                    occ, char, coolExp = cooldown.popleft()
+                    heapq.heappush(storage, [occ, char, 0])
+            # now use a task from our storage of ready-to-use tasks..
+            if storage:
+                occ, char, coolExp = heapq.heappop(storage)
+                occ += 1
+                if occ == 0: continue
+                coolExp = i + n + 1
+                cooldown.append([occ, char, coolExp])
+        return i
+    # A:3, B:3
