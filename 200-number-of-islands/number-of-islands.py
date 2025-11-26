@@ -19,4 +19,4 @@ class Solution:
                     dfs(r, c)
                     islands += 1
         return islands
-    # T: O(m * n), S: O(m * n)
+    # T: O(m * n), S: O(m * n) - optimize via changing cell to * or etc out of bound input
