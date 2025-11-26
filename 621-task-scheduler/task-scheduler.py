@@ -21,4 +21,4 @@ class Solution:
                 coolExp = i + n + 1
                 cooldown.append([occ, char, coolExp])
         return i
-    # A:3, B:3
+    # O(m * n), S: O(1)
