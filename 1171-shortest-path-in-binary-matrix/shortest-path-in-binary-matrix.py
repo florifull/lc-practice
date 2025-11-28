@@ -21,3 +21,4 @@ class Solution:
                         q.append((r+dr, c+dc))
                         grid[r+dr][c+dc] = 2
         return -1
+    # T: O(m * n), S: O(min(m, n))
