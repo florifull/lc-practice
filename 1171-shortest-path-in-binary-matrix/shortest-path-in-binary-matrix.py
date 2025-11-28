@@ -5,9 +5,8 @@ class Solution:
         rows, cols = len(grid), len(grid[0])
         self.target = (rows-1, cols-1)
         pathL = 0
-
         q = collections.deque()
-        visited = set({(0, 0)})
+        grid[0][0] = 2
         q.append((0, 0))
         dirs = [[0, 1], [1, 0], [1, 1], [1, -1], [-1, 1], [0, -1], [-1, 0], [-1, -1]] # 8 dir
         while q:
@@ -18,7 +17,7 @@ class Solution:
                     return pathL
                 for dr, dc in dirs:
                     if (r+dr in range(rows) and c+dc in range(cols)
-                        and (r+dr, c+dc) not in visited and grid[r+dr][c+dc] == 0):
+                        and grid[r+dr][c+dc] == 0):
                         q.append((r+dr, c+dc))
-                        visited.add((r+dr, c+dc))
+                        grid[r+dr][c+dc] = 2
         return -1
